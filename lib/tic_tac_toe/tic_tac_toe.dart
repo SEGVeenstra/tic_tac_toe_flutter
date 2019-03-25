@@ -1,18 +1,20 @@
 enum Player {Player1, Player2}
 
+enum GameState {busy, draw, player1Won, player2Won}
+
 class Game {
   final _history = List<BoardState>();
 
   BoardState get currentBoardState => _history.last;
   Player get playerTurn => _history.length % 2 == 1 ? Player.Player1 : Player.Player2;
-  Player get winner => currentBoardState.winner;
+  GameState get gameState => _getGameState();
   
   Game(){
     _history.add(BoardState.empty());
   }
 
   move(Player player, int fieldNumber){
-    if(winner != null)
+    if(gameState != GameState.busy)
       throw InvalidMoveException(TicTacToeError.gameOver);
 
     if(currentBoardState.lastMoveMadeBy == player || currentBoardState.lastMoveMadeBy == null && player == Player.Player2)
@@ -29,6 +31,14 @@ class Game {
 
     _history.add(BoardState(newFields, player));
     return currentBoardState;
+  }
+
+  GameState _getGameState(){
+    if(currentBoardState.winner != null)
+      return currentBoardState.winner == Player.Player1 ? GameState.player1Won : GameState.player2Won;
+    if(currentBoardState.fields.where((field) => field == null).length > 0)
+      return GameState.busy;
+    return GameState.draw;
   }
 
 }

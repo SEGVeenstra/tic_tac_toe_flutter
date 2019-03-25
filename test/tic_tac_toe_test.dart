@@ -30,33 +30,33 @@ void main() {
 
     var newGame1 = Game();
     newGame1.move(Player.Player1, 0);
-    expect(newGame1.winner, null);
+    expect(newGame1.gameState, GameState.busy);
     newGame1.move(Player.Player2, 1);
-    expect(newGame1.winner, null);
+    expect(newGame1.gameState, GameState.busy);
     newGame1.move(Player.Player1, 4);
-    expect(newGame1.winner, null);
+    expect(newGame1.gameState, GameState.busy);
     newGame1.move(Player.Player2, 2);
-    expect(newGame1.winner, null);
+    expect(newGame1.gameState, GameState.busy);
     newGame1.move(Player.Player1, 8);
-    expect(newGame1.winner, Player.Player1);
+    expect(newGame1.gameState, GameState.player1Won);
 
     var newGame2 = Game();
     newGame2.move(Player.Player1, 1);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player2, 6);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player1, 5);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player2, 4);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player1, 2);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player2, 8);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player1, 3);
-    expect(newGame2.winner, null);
+    expect(newGame2.gameState, GameState.busy);
     newGame2.move(Player.Player2, 7);
-    expect(newGame2.winner, Player.Player2);
+    expect(newGame2.gameState, GameState.player2Won);
   });
 
   test("valid move should update and return currentBoardState",(){
